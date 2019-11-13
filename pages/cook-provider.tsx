@@ -1,12 +1,41 @@
 import React from "react";
-import ApolloClient from "apollo-boost";
+import { HttpLink } from "apollo-link-http";
+import { WebSocketLink } from "apollo-link-ws";
 import { ApolloProvider } from "@apollo/react-hooks";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { split } from "apollo-link";
+import { getMainDefinition } from "apollo-utilities";
+
 import "cross-fetch/polyfill";
+import { ApolloClient } from "apollo-boost";
 import Cook from "./cook";
 
-const client = new ApolloClient({
+const cache = new InMemoryCache();
+
+const httpLink = new HttpLink({
   uri: "https://iproject03.herokuapp.com/v1/graphql"
 });
+
+const wsLink = new WebSocketLink({
+  uri: `ws://iproject03.herokuapp.com/v1/graphql`,
+  options: {
+    reconnect: true
+  }
+});
+
+const link = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === "OperationDefinition" &&
+      definition.operation === "subscription"
+    );
+  },
+  wsLink,
+  httpLink
+);
+
+const client = new ApolloClient({ link: link, cache: cache });
 
 const CookProvider = () => {
   return (
