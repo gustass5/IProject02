@@ -4,17 +4,21 @@ import { useSubscription } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 const Cashier = () => {
-  // const { data } = useSubscription(gql`
-  //   subscription MySubscription {
-  //     orders {
-  //       isready
-  //       name
-  //     }
-  //   }
-  // `);
+  const { data } = useSubscription(gql`
+    subscription MySubscription {
+      orders {
+        isready
+        name
+      }
+    }
+  `);
 
-  // console.log(data);
-  return <div></div>;
+  console.log(data);
+  return (
+    <div>
+      <button>ASDSAD</button>
+    </div>
+  );
 };
 
 export default Cashier;
