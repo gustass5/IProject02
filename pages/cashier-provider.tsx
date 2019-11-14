@@ -40,7 +40,7 @@ const link = process.browser
     )
   : httpLink;
 
-const client = new ApolloClient({ link: link, cache: cache });
+const client = new ApolloClient({ link: link, cache });
 
 const CashierProvider = () => {
   return (

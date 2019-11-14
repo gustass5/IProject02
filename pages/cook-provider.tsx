@@ -40,7 +40,7 @@ const link = process.browser
     )
   : null;
 
-const client = new ApolloClient({ link: link, cache: cache });
+const client = new ApolloClient({ link: link, cache });
 
 const CookProvider = () => {
   return (
