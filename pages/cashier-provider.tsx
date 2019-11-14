@@ -13,27 +13,32 @@ import { ApolloClient } from "apollo-boost";
 const cache = new InMemoryCache();
 
 const httpLink = new HttpLink({
-  uri: "https://iproject03.herokuapp.com/v1/graphql"
+  uri: "https://iproject03.herokuapp.com/v1/graphql",
+  credentials: "same-origin"
 });
 
-const wsLink = new WebSocketLink({
-  uri: `ws://iproject03.herokuapp.com/v1/graphql`,
-  options: {
-    reconnect: true
-  }
-});
+const wsLink = process.browser
+  ? new WebSocketLink({
+      uri: `ws://iproject03.herokuapp.com/v1/graphql`,
+      options: {
+        reconnect: true
+      }
+    })
+  : null;
 
-const link = split(
-  ({ query }) => {
-    const definition = getMainDefinition(query);
-    return (
-      definition.kind === "OperationDefinition" &&
-      definition.operation === "subscription"
-    );
-  },
-  wsLink,
-  httpLink
-);
+const link = process.browser
+  ? split(
+      ({ query }) => {
+        const definition = getMainDefinition(query);
+        return (
+          definition.kind === "OperationDefinition" &&
+          definition.operation === "subscription"
+        );
+      },
+      wsLink,
+      httpLink
+    )
+  : httpLink;
 
 const client = new ApolloClient({ link: link, cache: cache });
 
