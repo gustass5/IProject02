@@ -24,7 +24,9 @@ const OrderColumn = props => {
 
   return (
     <div className="flex-1 h-screen bg-gray-100">
-      <div className="w-full text-center text-4xl border-b">{props.title}</div>
+      <div className="w-full text-center text-4xl border-b truncate">
+        {props.title}
+      </div>
       {props.orders.map(order => (
         <Order
           order={order}

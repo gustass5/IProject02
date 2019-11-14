@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/output.css";
-import { useSubscription, useMutation } from "@apollo/react-hooks";
+import { useSubscription } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import OrderColumn from "../components/order-column";
 
@@ -14,7 +14,6 @@ const Cook = () => {
       }
     }
   `);
-  const [addOrder] = useMutation(MUTATION_ADD);
 
   if (data === undefined) {
     return <div>Loading...</div>;
@@ -25,7 +24,7 @@ const Cook = () => {
   const received = data.orders.filter(order => order.col === 3);
 
   return (
-    <div className="flex">
+    <div className="flex mx-2">
       <OrderColumn title="Orders" orders={orders} />
       <OrderColumn title="In Progress" orders={progress} />
       <OrderColumn title="Ready To Serve" orders={ready} />
@@ -33,15 +32,5 @@ const Cook = () => {
     </div>
   );
 };
-
-const MUTATION_ADD = gql`
-  mutation ADD($col: Int, $name: String) {
-    insert_orders(objects: { name: $name, col: $col }) {
-      returning {
-        id
-      }
-    }
-  }
-`;
 
 export default Cook;

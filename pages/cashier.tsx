@@ -42,7 +42,7 @@ const Cashier = () => {
       >
         Add
       </button>
-      <div className="flex">
+      <div className="flex mx-2">
         <OrderColumn title="Orders" orders={orders} />
         <OrderColumn title="In Progress" orders={progress} />
         <OrderColumn title="Ready To Serve" orders={ready} />
