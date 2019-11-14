@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/output.css";
+import "../styles/transition.css";
 import Link from "next/link";
 
 const Home = () => {

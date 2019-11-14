@@ -3,7 +3,7 @@ import React from "react";
 const Order = props => {
   return (
     <div
-      className={`flex items-center justify-center flex-col mb-2 m-1 bg-white shadow-md ${
+      className={`flex items-center justify-center flex-col mb-2 m-1 bg-white animate shadow-md ${
         props.order.col === 2
           ? "bg-green-200"
           : props.order.col === 3
