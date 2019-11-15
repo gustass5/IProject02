@@ -37,7 +37,10 @@ const Cashier = () => {
       <button
         className="mx-2"
         onClick={() => {
-          addOrder({ variables: { col: 0, name } });
+          if (name !== "") {
+            addOrder({ variables: { col: 0, name } });
+            changeName("");
+          }
         }}
       >
         Add

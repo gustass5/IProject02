@@ -19,7 +19,7 @@ const httpLink = new HttpLink({
 
 const wsLink = process.browser
   ? new WebSocketLink({
-      uri: `ws://iproject03.herokuapp.com/v1/graphql`,
+      uri: `wss://iproject03.herokuapp.com/v1/graphql`,
       options: {
         reconnect: true
       }

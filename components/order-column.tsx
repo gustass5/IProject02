@@ -23,7 +23,7 @@ const OrderColumn = props => {
   };
 
   return (
-    <div className="flex-1 h-screen bg-gray-100">
+    <div className="flex-1 h-full bg-gray-100 border-r">
       <div className="w-full text-center text-4xl border-b truncate">
         {props.title}
       </div>

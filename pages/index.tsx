@@ -7,12 +7,12 @@ const Home = () => {
   return (
     <div className="flex">
       <Link href="/cashier-provider">
-        <div className="flex flex-1 h-screen bg-blue-500 justify-center items-center text-4xl cursor-pointer hover:bg-blue-400 hover:text-white">
+        <div className="flex flex-1 h-screen bg-gray-100 justify-center items-center text-4xl cursor-pointer hover:bg-gray-300 hover:text-white">
           Cashier
         </div>
       </Link>
       <Link href="/cook-provider">
-        <div className="flex flex-1 h-screen bg-green-500 justify-center items-center text-4xl cursor-pointer hover:bg-green-400 hover:text-white">
+        <div className="flex flex-1 h-screen bg-gray-100 justify-center items-center text-4xl cursor-pointer hover:bg-gray-300 hover:text-white">
           Cook
         </div>
       </Link>
