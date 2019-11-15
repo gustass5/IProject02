@@ -17,28 +17,24 @@ const httpLink = new HttpLink({
   credentials: "same-origin"
 });
 
-const wsLink = process.browser
-  ? new WebSocketLink({
-      uri: `wss://iproject03.herokuapp.com/v1/graphql`,
-      options: {
-        reconnect: true
-      }
-    })
-  : null;
+const wsLink = new WebSocketLink({
+  uri: `wss://iproject03.herokuapp.com/v1/graphql`,
+  options: {
+    reconnect: true
+  }
+});
 
-const link = process.browser
-  ? split(
-      ({ query }) => {
-        const definition = getMainDefinition(query);
-        return (
-          definition.kind === "OperationDefinition" &&
-          definition.operation === "subscription"
-        );
-      },
-      wsLink,
-      httpLink
-    )
-  : httpLink;
+const link = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === "OperationDefinition" &&
+      definition.operation === "subscription"
+    );
+  },
+  wsLink,
+  httpLink
+);
 
 const client = new ApolloClient({ link: link, cache });
 
