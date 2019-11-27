@@ -5,6 +5,7 @@ import gql from "graphql-tag";
 
 const OrderColumn = props => {
   const [moveOrder] = useMutation(MUTATION_UPDATE);
+  const [deleteOrder] = useMutation(MUTATION_DELETE);
 
   const moveNext = (id: number, col: number) => {
     if (col === 3) {
@@ -32,6 +33,7 @@ const OrderColumn = props => {
           order={order}
           moveNext={(id: number, col: number) => moveNext(id, col)}
           moveBack={(id: number, col: number) => moveBack(id, col)}
+          delete={(id: number) => deleteOrder({ variables: { id } })}
         />
       ))}
     </div>
@@ -49,4 +51,13 @@ const MUTATION_UPDATE = gql`
   }
 `;
 
+const MUTATION_DELETE = gql`
+  mutation Delete($id: Int) {
+    delete_orders(where: { id: { _eq: $id } }) {
+      returning {
+        id
+      }
+    }
+  }
+`;
 export default OrderColumn;

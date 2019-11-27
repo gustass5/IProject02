@@ -16,7 +16,7 @@ const Cashier = () => {
   `);
 
   const [addOrder] = useMutation(MUTATION);
-  const [name, changeName] = useState("");
+  const [name, changeName] = useState("Vesuvio");
 
   if (data === undefined) {
     return <div>Loading...</div>;
@@ -28,18 +28,24 @@ const Cashier = () => {
   const received = data.orders.filter(order => order.col === 3);
   return (
     <div>
-      <input
-        placeholder="Enter pizza name..."
-        className="border-b shadow p-1 m-2"
-        value={name}
-        onChange={event => changeName(event.target.value)}
-      />
+      <select
+        onChange={event => {
+          changeName(event.target.value);
+        }}
+        className="border-b text-xl cursor-pointer shadow p-2 m-2 bg-blue-100"
+      >
+        <option value="Vesuvio">Vesuvio</option>
+        <option value="Margarita">Margarita</option>
+        <option value="Student">Student</option>
+        <option value="Audi">Audi</option>
+        <option value="Marinara">Marinara</option>
+        <option value="Caprese">Caprese</option>
+      </select>
       <button
-        className="mx-2"
+        className="mx-2 text-xl"
         onClick={() => {
           if (name !== "") {
             addOrder({ variables: { col: 0, name } });
-            changeName("");
           }
         }}
       >

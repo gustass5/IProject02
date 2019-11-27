@@ -3,7 +3,7 @@ import React from "react";
 const Order = props => {
   return (
     <div
-      className={`flex items-center justify-center flex-col mb-2 m-1 bg-white animate shadow-md ${
+      className={`relative flex items-center justify-center flex-col mb-2 m-1 bg-white animate shadow-md ${
         props.order.col === 2
           ? "bg-green-200"
           : props.order.col === 3
@@ -11,6 +11,12 @@ const Order = props => {
           : ""
       }`}
     >
+      <div
+        className="absolute m-1 top-0 right-0 rounded-full h-5 w-5 cursor-pointer hover:bg-gray-600 font-bold flex items-center justify-center text-gray-700 bg-gray-500 ml-auto"
+        onClick={() => props.delete(props.order.id)}
+      >
+        x
+      </div>
       <div className="flex py-4 w-full items-center justify-between">
         <div className="flex-1">
           <img className="w-20 mx-auto" src="pizza.png" />
